@@ -1,0 +1,86 @@
+Bank
+	addAccount()
+	removeAccount()
+	addClient()
+	removeClient()
+	
+Customer(POJO)
+	username
+	password
+	firstName
+	lastName
+	email
+	address
+
+Account(abastract)
+	number
+	balance
+	deposit()
+	withdraw()
+
+CheckingAccount
+	fee
+	calculateFee()
+
+SavingsAccount
+	interest
+	calculateInterest()
+	
+Transaction
+	date
+	type
+	amount
+	balance
+
+DAO
+	find()
+	insert()
+	delete()
+	update()
+
+Screen(abastract)
+	name
+	route
+	render()
+	
+WelcomeScreen
+	consolReader
+	router
+	render()
+	
+LoginScreen
+	consolReader
+	DAO
+	render()
+	
+RegisterScreen
+	consolReader
+	DAO
+	render()
+	
+AppState
+	consolReader
+	router
+	appRunning
+	isAppRunning()
+	setAppRunning()
+	
+ScreenRouter
+	screens
+	addScreen()
+	navigate(route)
+	
+ConnectionFactory
+	connectionFactory
+	props
+	getInstance()
+	getConnection()
+	
+Collection
+
+List
+
+Queue
+
+LinkedList
+
