@@ -1,0 +1,27 @@
+customers
+	pk		id					serial
+	u/nn	username			varchar
+	nn		password			varchar
+	nn		firstName			varchar
+	nn		lastName			varchar
+	u/nn	email				varchar
+
+accounts
+	pk/nn	id
+	fk		customer_id
+	fk		type_id
+	d/c/nn	balance
+
+account_types
+	pk		id					serial
+	u/nn	name				varchar
+
+transactions
+	pk/nn	id
+	nn		date
+	fk		type_id
+	nn		amount
+
+transaction_types
+	pk		id					serial
+	u/nn	name				varchar
