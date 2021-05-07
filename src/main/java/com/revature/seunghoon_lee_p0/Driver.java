@@ -10,7 +10,6 @@ public class Driver {
 
         while(app.isRunning()) {
             app.getRouter().navigate("/welcome");
-            app.setIsRunning(false);
         }
 
     }
