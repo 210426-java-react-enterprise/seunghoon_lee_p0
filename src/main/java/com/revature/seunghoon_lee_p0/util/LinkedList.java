@@ -31,7 +31,7 @@ public class LinkedList<T> implements List<T>, Queue<T> {
     @Override
     public void add(T data) {
         if(data == null) {
-            throw new IllegalArgumentException("Null is not allowed as a value!");
+            throw new IllegalArgumentException("Null is not allowed as an argument!");
         }
         Node<T> newNode = new Node<T>(data);
         if (head == null) {
@@ -46,6 +46,9 @@ public class LinkedList<T> implements List<T>, Queue<T> {
 
     @Override
     public boolean contains(T data) {
+        if(data == null) {
+            throw new IllegalArgumentException("Null is not allowed as an argument!");
+        }
         Node<T> currentNode = head;
         for (int i = 0 ; i < size ; i++) {
             if (currentNode.data == data) {
@@ -57,18 +60,24 @@ public class LinkedList<T> implements List<T>, Queue<T> {
 
     @Override
     public T remove(T data) {
+        if(data == null) {
+            throw new IllegalArgumentException("Null is not allowed as an argument!");
+        }
         Node<T> currentNode = head;
         for ( int i = 0 ; i < size ; i++) {
             if (currentNode.data == data) {
                 if(currentNode.prevNode != null) {
                     currentNode.prevNode.nextNode = currentNode.nextNode;
+                } else {
+
                 }
                 if(currentNode.nextNode != null) {
                     currentNode.nextNode.prevNode = currentNode.prevNode;
                 }
                 size--;
-                return currentNode.data;
+                return data;
             }
+            currentNode = currentNode.nextNode;
         }
         return null;
     }
@@ -90,7 +99,10 @@ public class LinkedList<T> implements List<T>, Queue<T> {
 
     @Override
     public T peek() {
-        return head.data;
+        if(head != null) {
+            return head.data;
+        }
+        return null;
     }
 
     @Override
