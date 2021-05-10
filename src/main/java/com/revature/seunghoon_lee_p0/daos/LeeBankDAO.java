@@ -60,7 +60,7 @@ public class LeeBankDAO {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "select * from lee_bank.customer where email = ?";
+            String sql = "select * from lee_bank.customers where email = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();

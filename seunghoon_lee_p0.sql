@@ -4,6 +4,9 @@ select current_user, session_user; --postgres, postgres
 create schema lee_bank;
 alter schema lee_bank owner to slee;
 
+grant usage on all tables in schema lee_bank to slee;
+grant all privileges on schema lee_bank to slee;
+
 --select aws-postgresql-slee
 
 select current_user, session_user; --slee, slee
