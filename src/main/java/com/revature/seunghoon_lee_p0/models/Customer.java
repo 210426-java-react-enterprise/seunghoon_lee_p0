@@ -1,7 +1,7 @@
 package com.revature.seunghoon_lee_p0.models;
 
 public class Customer {
-    private int id;
+    private int customerId;
     String username;
     String password;
     String firstName;
@@ -16,14 +16,14 @@ public class Customer {
         this.email = email;
     }
 
-    public Customer(int id, String username, String password, String firstName, String lastName, String email) {
+    public Customer(int customerId, String username, String password, String firstName, String lastName, String email) {
         this(username, password, firstName, lastName, email);
-        this.id = id;
+        this.customerId = customerId;
     }
 
-    public int getId() { return id; }
+    public int getCustomerId() { return customerId; }
 
-    public void setId(int id) { this.id = id; }
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
 
     public String getUsername() {
         return username;

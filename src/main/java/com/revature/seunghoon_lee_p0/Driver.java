@@ -8,9 +8,13 @@ public class Driver {
 
     public static void main(String[] args) {
 
+        System.out.println("Welcome to Lee Bank!");
+
         while(app.isRunning()) {
             app.getRouter().navigate("/welcome");
         }
+        System.out.println("\n");
+        System.out.println("Bye!");
 
     }
 
