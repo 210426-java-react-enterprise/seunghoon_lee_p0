@@ -31,3 +31,6 @@ target/
 
 #Properties files
 *.properties
+
+#Temporary files
+temp/
