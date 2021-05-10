@@ -1,6 +1,7 @@
 package com.revature.seunghoon_lee_p0.util;
 
 import com.revature.seunghoon_lee_p0.screens.Screen;
+import com.revature.seunghoon_lee_p0.util.LinkedList;
 
 public class ScreenRouter {
 

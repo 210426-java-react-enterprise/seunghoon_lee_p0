@@ -83,7 +83,7 @@ public class LeeBankDAO {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "select * from lea_bank.customers where username = ? and password = ?";
+            String sql = "select * from lee_bank.customers where username = ? and password = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             pstmt.setString(2, password);

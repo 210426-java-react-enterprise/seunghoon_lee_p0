@@ -43,9 +43,14 @@ public class RegisterScreen extends Screen {
 
             Customer newCustomer = new Customer(username, password, firstName, lastName, email);
             registerService.register(newCustomer);
+            System.out.println("Successfully registered!");
 
-        } catch(InvalidRequestException | ResourcePersistenceException e) {
-            e.printStackTrace();
+        } catch(InvalidRequestException e) {
+            System.out.println("Invalid input!");
+            //e.printStackTrace();
+        } catch(ResourcePersistenceException e) {
+            System.out.println("Username or Email already in use!");
+            //e.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
         }
