@@ -1,5 +1,6 @@
 package com.revature.seunghoon_lee_p0.screens;
 
+import com.revature.seunghoon_lee_p0.services.AccountService;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -10,11 +11,13 @@ public class DashboardScreen extends Screen {
 
     private BufferedReader consoleReader;
     private ScreenRouter router;
+    private AccountService accountService;
 
-    public DashboardScreen(BufferedReader consoleReader, ScreenRouter router) {
+    public DashboardScreen(BufferedReader consoleReader, ScreenRouter router, AccountService accountService) {
         super("DashboardScreen", "/dashboard");
         this.consoleReader = consoleReader;
         this.router = router;
+        this.accountService = accountService;
     }
 
     @Override
