@@ -4,6 +4,7 @@ import com.revature.seunghoon_lee_p0.exceptions.AuthenticationException;
 import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
 import com.revature.seunghoon_lee_p0.models.Customer;
 import com.revature.seunghoon_lee_p0.services.LoginService;
+import com.revature.seunghoon_lee_p0.util.AppState;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -37,12 +38,16 @@ public class LoginScreen extends Screen {
             password = consoleReader.readLine();
 
             Customer authenticatedCustomer = loginService.authenticate(username, password);
-            if(authenticatedCustomer != null) {
+            while(authenticatedCustomer != null) {
                 router.navigate("/dashboard");
             }
 
-        } catch (InvalidRequestException | AuthenticationException e) {
-            e.printStackTrace();
+        } catch (InvalidRequestException e) {
+            System.out.println("Invalid username or password!");
+            //e.printStackTrace();
+        } catch (AuthenticationException e) {
+            System.out.println("Could not find that username or password");
+            //e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

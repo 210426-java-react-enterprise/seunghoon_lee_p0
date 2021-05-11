@@ -1,5 +1,6 @@
 package com.revature.seunghoon_lee_p0.util;
 
+import com.revature.seunghoon_lee_p0.util.LinkedList;
 import org.junit.*;
 
 public class LinkedListTest {

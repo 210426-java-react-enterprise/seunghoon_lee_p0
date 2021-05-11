@@ -1,6 +1,8 @@
 package com.revature.seunghoon_lee_p0.util;
 
 import com.revature.seunghoon_lee_p0.daos.LeeBankDAO;
+import com.revature.seunghoon_lee_p0.models.Customer;
+import com.revature.seunghoon_lee_p0.screens.DashboardScreen;
 import com.revature.seunghoon_lee_p0.screens.LoginScreen;
 import com.revature.seunghoon_lee_p0.screens.RegisterScreen;
 import com.revature.seunghoon_lee_p0.screens.HomeScreen;
@@ -23,11 +25,11 @@ public class AppState {
         final RegisterService registerService = new RegisterService(leeBankDAO);
 
         isRunning = true;
-
         router = new ScreenRouter();
         router.addScreen(new HomeScreen(consoleReader, router))
               .addScreen(new LoginScreen(consoleReader, router, loginService))
-              .addScreen(new RegisterScreen(consoleReader, registerService));
+              .addScreen(new RegisterScreen(consoleReader, registerService))
+              .addScreen(new DashboardScreen(consoleReader, router));
     }
 
     public void startApp() {
