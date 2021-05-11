@@ -1,6 +1,6 @@
 package com.revature.seunghoon_lee_p0.screens;
 
-import com.revature.seunghoon_lee_p0.services.AccountService;
+import com.revature.seunghoon_lee_p0.daos.AccountDAO;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -11,13 +11,13 @@ public class DepositScreen extends Screen {
 
     private BufferedReader consoleReader;
     private ScreenRouter router;
-    private AccountService accountService;
+    private AccountDAO accountDAO;
 
-    public DepositScreen(BufferedReader consoleReader, ScreenRouter router, AccountService accountService) {
+    public DepositScreen(BufferedReader consoleReader, ScreenRouter router, AccountDAO accountDAO) {
         super("DepositScreen", "/deposit");
         this.consoleReader = consoleReader;
         this.router = router;
-        this.accountService = accountService;
+        this.accountDAO = accountDAO;
     }
 
     @Override

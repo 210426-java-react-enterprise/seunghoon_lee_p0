@@ -1,6 +1,6 @@
 package com.revature.seunghoon_lee_p0.screens;
 
-import com.revature.seunghoon_lee_p0.services.AccountService;
+import com.revature.seunghoon_lee_p0.daos.AccountDAO;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -11,19 +11,19 @@ public class DashboardScreen extends Screen {
 
     private BufferedReader consoleReader;
     private ScreenRouter router;
-    private AccountService accountService;
+    private AccountDAO accountDAO;
 
-    public DashboardScreen(BufferedReader consoleReader, ScreenRouter router, AccountService accountService) {
+    public DashboardScreen(BufferedReader consoleReader, ScreenRouter router, AccountDAO accountDAO) {
         super("DashboardScreen", "/dashboard");
         this.consoleReader = consoleReader;
         this.router = router;
-        this.accountService = accountService;
+        this.accountDAO = accountDAO;
     }
 
     @Override
     public void render() {
 
-        System.out.println("Please select your choice!");
+        System.out.println("Please select your choice.");
         System.out.println("1) Create new account");
         System.out.println("2) Deposit");
         System.out.println("3) Withdraw");

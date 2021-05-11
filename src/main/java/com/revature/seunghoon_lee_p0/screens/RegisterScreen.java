@@ -30,7 +30,7 @@ public class RegisterScreen extends Screen {
         String email;
 
         try {
-            System.out.println("Register for a new account!");
+            System.out.println("Register for a new account.");
 
             System.out.print("Username: ");
             username = consoleReader.readLine();

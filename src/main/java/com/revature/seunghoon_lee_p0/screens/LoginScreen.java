@@ -4,7 +4,6 @@ import com.revature.seunghoon_lee_p0.daos.AccountDAO;
 import com.revature.seunghoon_lee_p0.exceptions.AuthenticationException;
 import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
 import com.revature.seunghoon_lee_p0.models.Customer;
-import com.revature.seunghoon_lee_p0.services.AccountService;
 import com.revature.seunghoon_lee_p0.services.LoginService;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
@@ -17,15 +16,12 @@ public class LoginScreen extends Screen {
     private LoginService loginService;
     private Customer currentCustomer;
     private AccountDAO accountDAO;
-    private AccountService accountService;
 
     public LoginScreen(BufferedReader consoleReader, ScreenRouter router, LoginService loginService) {
         super("LoginScreen", "/login");
         this.consoleReader = consoleReader;
         this.router = router;
         this.loginService = loginService;
-        accountDAO = new AccountDAO();
-        accountService = new AccountService(accountDAO, null);
     }
 
     @Override
@@ -36,7 +32,7 @@ public class LoginScreen extends Screen {
             String username;
             String password;
 
-            System.out.println("Please enter your username and password!");
+            System.out.println("Please enter your username and password.");
 
             System.out.print("Username: ");
             username = consoleReader.readLine();
@@ -47,11 +43,12 @@ public class LoginScreen extends Screen {
             if(currentCustomer != null) {
 
                 System.out.println("Login Successful!");
-                accountService.setCurrentCustomer(currentCustomer);
-                router.addScreen(new DashboardScreen(consoleReader, router, accountService))
-                      .addScreen(new CreateAccountScreen(consoleReader, router, accountService))
-                      .addScreen(new DepositScreen(consoleReader, router, accountService))
-                      .addScreen(new WithdrawScreen(consoleReader, router, accountService));
+                accountDAO = new AccountDAO(currentCustomer);
+
+                router.addScreen(new DashboardScreen(consoleReader, router, accountDAO))
+                      .addScreen(new CreateAccountScreen(consoleReader, router, accountDAO))
+                      .addScreen(new DepositScreen(consoleReader, router, accountDAO))
+                      .addScreen(new WithdrawScreen(consoleReader, router, accountDAO));
 
                 router.navigate("/dashboard");
 
@@ -61,7 +58,7 @@ public class LoginScreen extends Screen {
             System.out.println("Invalid username or password!");
             //e.printStackTrace();
         } catch (AuthenticationException e) {
-            System.out.println("Could not find that username or password");
+            System.out.println("Could not find that username or password!");
             //e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();

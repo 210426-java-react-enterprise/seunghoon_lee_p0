@@ -1,9 +1,9 @@
 package com.revature.seunghoon_lee_p0.daos;
 
 import com.revature.seunghoon_lee_p0.models.Account;
+import com.revature.seunghoon_lee_p0.models.Customer;
 import com.revature.seunghoon_lee_p0.util.ConnectionFactory;
 
-import java.io.StringBufferInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,38 +11,42 @@ import java.sql.SQLException;
 
 public class AccountDAO {
 
-    public void create(Account newAccount) {
+    private Customer currentCustomer;
+
+    public AccountDAO(Customer currentCustomer) {
+        this.currentCustomer = currentCustomer;
+    }
+
+    public boolean createAccount() {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "Insert into lee_bank.accounts (user_id, date_open, balance) values(?,?,?)";
+            String sql = "insert into lee_bank.accounts (customer_id, balance) values(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"account_id"});
-            pstmt.setInt(1, newAccount.getCustomerId());
-            pstmt.setDouble(2, newAccount.getBalance());
+            pstmt.setInt(1, currentCustomer.getCustomerId());
+            pstmt.setDouble(2, 0.0);
             int rowsInserted = pstmt.executeUpdate();
 
             if(rowsInserted != 0) {
-                ResultSet rs = pstmt.getGeneratedKeys();
-                while(rs.next()) {
-                    newAccount.setAccountId(rs.getInt("account_id"));
-                }
+                return true;
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
+        return false;
 
     }
 
-    public Account getAccount(int accountId) {
+    public Account getAccount() {
 
         Account account = null;
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "select balance from lee_bank.accounts where account_id = ?";
+            String sql = "select balance from lee_bank.accounts where customer_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, accountId);
+            pstmt.setInt(1, currentCustomer.getCustomerId());
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()) {

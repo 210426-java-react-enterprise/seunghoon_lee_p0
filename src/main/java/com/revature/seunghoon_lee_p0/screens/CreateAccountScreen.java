@@ -1,13 +1,9 @@
 package com.revature.seunghoon_lee_p0.screens;
 
-import com.revature.seunghoon_lee_p0.models.Account;
-import com.revature.seunghoon_lee_p0.services.AccountService;
-import com.revature.seunghoon_lee_p0.services.LoginService;
+import com.revature.seunghoon_lee_p0.daos.AccountDAO;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
-import java.io.IOError;
-import java.io.IOException;
 
 import static com.revature.seunghoon_lee_p0.Driver.app;
 
@@ -15,13 +11,13 @@ public class CreateAccountScreen extends Screen {
 
     private BufferedReader consoleReader;
     private ScreenRouter router;
-    private AccountService accountService;
+    private AccountDAO accountDAO;
 
-    public CreateAccountScreen(BufferedReader consoleReader, ScreenRouter router, AccountService accountService) {
+    public CreateAccountScreen(BufferedReader consoleReader, ScreenRouter router, AccountDAO accountDAO) {
         super("CreateAccountScreen", "/createAccount");
         this.consoleReader = consoleReader;
         this.router = router;
-        this.accountService = accountService;
+        this.accountDAO = accountDAO;
     }
 
     @Override
@@ -29,9 +25,28 @@ public class CreateAccountScreen extends Screen {
 
         try {
 
+            System.out.println("Please select your choice.");
+            System.out.println("1) Checking account");
+            System.out.println("2) Saving account");
+            System.out.print(">> ");
+            String userSelection = consoleReader.readLine();
+
+            switch (userSelection) {
+                case "1" :
+                    if(accountDAO.createAccount()) {
+                        System.out.println("New account created!");
+                    } else {
+                        System.out.println("Failed to create an account!");
+                    }
+                    break;
+                case "2" :
+                    System.out.println("Under construction!");
+                    break;
+            }
+            router.navigate("/dashboard");
 
         } catch (Exception e) {
-            System.out.println("Unkown Error!");
+            System.out.println("Unknown Error!");
             app().finishApp();
             //e.printStackTrace();
         }

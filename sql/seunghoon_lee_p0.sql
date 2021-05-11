@@ -17,10 +17,26 @@ drop table if exists "customers";
 
 create table "customers" (
 	"customer_id" serial, 
-	"username" varchar(25) not null,
+	"username" varchar(25) unique, not null,
 	"password" varchar(255) not null,
 	"first_name" varchar(25) not null,
 	"last_name" varchar(25) not null,
-	"email" varchar(25),
-	constraint pk_customer primary key ("customer_id")
+	"email" varchar(25) unique, not null
+	constraint "pk_customer" primary key ("customer_id");
 );
+
+select * from lee_bank."customers";
+
+drop table if exists "accounts";
+
+create table "accounts" (
+	"account_id" serial,
+	"customer_id" int,
+	"balance" numeric(10, 2) ,
+	constraint "pk_account" primary key("account_id")
+);
+
+alter table "accounts" add constraint "fk_accouts_customer_id"
+	foreign key ("customer_id") references "customers" ("customer_id");
+	
+insert into lee_bank.accounts (customer_id, balance) values(1,0.0);
