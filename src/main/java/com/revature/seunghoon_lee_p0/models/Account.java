@@ -1,6 +1,6 @@
 package com.revature.seunghoon_lee_p0.models;
 
-public abstract class Account {
+public class Account {
 
     private static int count = 0;
     private int accountNumber;
@@ -23,7 +23,17 @@ public abstract class Account {
         return balance;
     }
 
-    public abstract void deposit(double fund);
-    public abstract void withdraw(double fund);
+    public void deposit(double fund) {
+        balance = balance + fund;
+    };
+
+    public boolean withdraw(double fund) {
+
+        if(balance >= fund) {
+            balance = balance - fund;
+            return true;
+        }
+        return false;
+    };
 
 }
