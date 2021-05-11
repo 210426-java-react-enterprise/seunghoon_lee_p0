@@ -1,16 +1,16 @@
 package com.revature.seunghoon_lee_p0.services;
 
-import com.revature.seunghoon_lee_p0.daos.LeeBankDAO;
+import com.revature.seunghoon_lee_p0.daos.CustomerDAO;
 import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
 import com.revature.seunghoon_lee_p0.exceptions.ResourcePersistenceException;
 import com.revature.seunghoon_lee_p0.models.Customer;
 
 public class RegisterService {
 
-    private LeeBankDAO leeBankDao;
+    private CustomerDAO customerDao;
 
-    public RegisterService(LeeBankDAO leeBankDao) {
-        this.leeBankDao = leeBankDao;
+    public RegisterService(CustomerDAO customerDao) {
+        this.customerDao = customerDao;
     }
 
     public Customer register(Customer newCustomer) throws InvalidRequestException, ResourcePersistenceException {
@@ -18,15 +18,15 @@ public class RegisterService {
             throw new InvalidRequestException("Invalid data provided for new customer!");
         }
 
-        if (!leeBankDao.isUsernameAvailable(newCustomer.getUsername())) {
+        if (!customerDao.isUsernameAvailable(newCustomer.getUsername())) {
             throw new ResourcePersistenceException("The provided username is already taken!");
         }
 
-        if (!leeBankDao.isEmailAvailable(newCustomer.getEmail())) {
+        if (!customerDao.isEmailAvailable(newCustomer.getEmail())) {
             throw new ResourcePersistenceException("The provided email is already taken!");
         }
 
-        return leeBankDao.save(newCustomer);
+        return customerDao.save(newCustomer);
     }
 
     public boolean isUserValid(Customer customer) {

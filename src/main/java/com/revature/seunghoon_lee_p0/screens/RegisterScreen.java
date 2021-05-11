@@ -7,6 +7,8 @@ import com.revature.seunghoon_lee_p0.services.RegisterService;
 
 import java.io.BufferedReader;
 
+import static com.revature.seunghoon_lee_p0.Driver.app;
+
 public class RegisterScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -52,7 +54,9 @@ public class RegisterScreen extends Screen {
             System.out.println("Username or Email already in use!");
             //e.printStackTrace();
         } catch(Exception e) {
-            e.printStackTrace();
+            System.out.println("Unknown Error!");
+            app().finishApp();
+            //e.printStackTrace();
         }
 
     }

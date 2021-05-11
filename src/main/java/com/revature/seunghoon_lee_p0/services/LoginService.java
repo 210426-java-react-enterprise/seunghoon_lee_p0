@@ -1,16 +1,16 @@
 package com.revature.seunghoon_lee_p0.services;
 
-import com.revature.seunghoon_lee_p0.daos.LeeBankDAO;
+import com.revature.seunghoon_lee_p0.daos.CustomerDAO;
 import com.revature.seunghoon_lee_p0.exceptions.AuthenticationException;
 import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
 import com.revature.seunghoon_lee_p0.models.Customer;
 
 public class LoginService {
 
-    private LeeBankDAO leeBankDAO;
+    private CustomerDAO customerDAO;
 
-    public LoginService(LeeBankDAO leeBankDAO) {
-        this.leeBankDAO = leeBankDAO;
+    public LoginService(CustomerDAO customerDAO) {
+        this.customerDAO = customerDAO;
     }
 
     public Customer authenticate(String username, String password) {
@@ -19,7 +19,7 @@ public class LoginService {
             throw new InvalidRequestException("Invalid username or password!");
         }
 
-        Customer customer = leeBankDAO.findCustomerByUsernameAndPassword(username, password);
+        Customer customer = customerDAO.findCustomerByUsernameAndPassword(username, password);
         if (customer == null) {
             throw new AuthenticationException("Could not find that username and password!");
         }

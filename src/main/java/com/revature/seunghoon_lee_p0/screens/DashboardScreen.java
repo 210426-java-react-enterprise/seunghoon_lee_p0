@@ -36,7 +36,6 @@ public class DashboardScreen extends Screen {
                 case "1":
                     router.navigate("/createAccount");
                     break;
-
                 case "2":
                     router.navigate("/deposit");
                     break;
