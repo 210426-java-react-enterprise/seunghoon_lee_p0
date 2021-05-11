@@ -4,6 +4,8 @@ import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
+import static com.revature.seunghoon_lee_p0.Driver.app;
+
 public class DashboardScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -23,6 +25,35 @@ public class DashboardScreen extends Screen {
         System.out.println("2) Deposit");
         System.out.println("3) Withdraw");
         System.out.println("4) Log out");
+
+        try{
+
+            System.out.print(">> ");
+            String userSelection = consoleReader.readLine();
+
+            switch (userSelection) {
+
+                case "1":
+                    router.navigate("/createAccount");
+                    break;
+
+                case "2":
+                    router.navigate("/deposit");
+                    break;
+                case "3":
+                    router.navigate("/withdraw");
+                    break;
+                case "4":
+                    app().finishApp();
+                    break;
+                default:
+                    System.out.println("Invalid selection!");
+
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

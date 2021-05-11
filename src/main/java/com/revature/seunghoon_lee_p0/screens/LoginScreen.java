@@ -4,7 +4,6 @@ import com.revature.seunghoon_lee_p0.exceptions.AuthenticationException;
 import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
 import com.revature.seunghoon_lee_p0.models.Customer;
 import com.revature.seunghoon_lee_p0.services.LoginService;
-import com.revature.seunghoon_lee_p0.util.AppState;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -19,11 +18,11 @@ public class LoginScreen extends Screen {
         super("LoginScreen", "/login");
         this.consoleReader = consoleReader;
         this.router = router;
-        this.loginService = loginService;
     }
 
     @Override
     public void render() {
+
 
         try {
 
@@ -38,7 +37,7 @@ public class LoginScreen extends Screen {
             password = consoleReader.readLine();
 
             Customer authenticatedCustomer = loginService.authenticate(username, password);
-            while(authenticatedCustomer != null) {
+            if(authenticatedCustomer != null) {
                 router.navigate("/dashboard");
             }
 
