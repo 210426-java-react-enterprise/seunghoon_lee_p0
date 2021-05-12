@@ -1,6 +1,6 @@
 package com.revature.seunghoon_lee_p0.screens;
 
-import com.revature.seunghoon_lee_p0.daos.AccountDAO;
+import com.revature.seunghoon_lee_p0.services.AccountService;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -11,13 +11,13 @@ public class CreateAccountScreen extends Screen {
 
     private BufferedReader consoleReader;
     private ScreenRouter router;
-    private AccountDAO accountDAO;
+    private AccountService accountService;
 
-    public CreateAccountScreen(BufferedReader consoleReader, ScreenRouter router, AccountDAO accountDAO) {
+    public CreateAccountScreen(BufferedReader consoleReader, ScreenRouter router, AccountService accountService) {
         super("CreateAccountScreen", "/createAccount");
         this.consoleReader = consoleReader;
         this.router = router;
-        this.accountDAO = accountDAO;
+        this.accountService = accountService;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class CreateAccountScreen extends Screen {
 
             switch (userSelection) {
                 case "1" :
-                    if(accountDAO.createAccount()) {
+                    if(accountService.createAccount()) {
                         System.out.println("New account created!");
                     } else {
                         System.out.println("Failed to create an account!");
@@ -42,14 +42,14 @@ public class CreateAccountScreen extends Screen {
                 case "2" :
                     System.out.println("Under construction!");
                     break;
+                default :
+                    System.out.println("Invalid selection!");
             }
-            router.navigate("/dashboard");
 
         } catch (Exception e) {
-            System.out.println("Unknown Error!");
-            app().finishApp();
-            //e.printStackTrace();
+            e.printStackTrace();
         }
+        router.navigate("/dashboard");
 
     }
 }

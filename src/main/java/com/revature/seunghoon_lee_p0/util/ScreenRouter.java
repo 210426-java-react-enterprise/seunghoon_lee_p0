@@ -12,6 +12,11 @@ public class ScreenRouter {
         return this;
     }
 
+    public ScreenRouter removeScreen(Screen screen) {
+        screens.remove(screen);
+        return this;
+    }
+
     public void navigate(String route) {
         for (int i = 0 ; i < screens.size() ; i++) {
             Screen screen = screens.get(i);

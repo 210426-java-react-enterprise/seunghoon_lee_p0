@@ -1,7 +1,6 @@
 package com.revature.seunghoon_lee_p0.daos;
 
 import com.revature.seunghoon_lee_p0.models.Account;
-import com.revature.seunghoon_lee_p0.models.Customer;
 import com.revature.seunghoon_lee_p0.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -11,19 +10,13 @@ import java.sql.SQLException;
 
 public class AccountDAO {
 
-    private Customer currentCustomer;
-
-    public AccountDAO(Customer currentCustomer) {
-        this.currentCustomer = currentCustomer;
-    }
-
-    public boolean createAccount() {
+    public boolean insertAccount(int customerId)  {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "insert into lee_bank.accounts (customer_id, balance) values(?,?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"account_id"});
-            pstmt.setInt(1, currentCustomer.getCustomerId());
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, customerId);
             pstmt.setDouble(2, 0.0);
             int rowsInserted = pstmt.executeUpdate();
 
@@ -32,21 +25,21 @@ public class AccountDAO {
             }
 
         } catch (SQLException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         return false;
 
     }
 
-    public Account getAccount() {
+    public Account getAccount(int customerId) {
 
         Account account = null;
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "select balance from lee_bank.accounts where customer_id = ?";
+            String sql = "select * from lee_bank.accounts where customer_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, currentCustomer.getCustomerId());
+            pstmt.setInt(1, customerId);
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()) {
@@ -65,19 +58,29 @@ public class AccountDAO {
 
     }
 
-    public void updateBalance(int accountId, double newBalance) {
+    public boolean insertTransaction(int accountId, int customerId, String type, double amount, double balance) {
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "update table lee_bank.accounts set balance = ? where account_id = ?";
+            String sql = "insert into lee_bank.transactions " +
+                         "(account_id, customer_id, type, amount, balance) " +
+                         "values(?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setDouble(1, newBalance);
-            pstmt.setInt(2, accountId);
-            pstmt.executeQuery();
+            pstmt.setInt(1, accountId);
+            pstmt.setInt(2, customerId);
+            pstmt.setString(3, type);
+            pstmt.setDouble(4, amount);
+            pstmt.setDouble(5, balance);
+            int rowsInserted = pstmt.executeUpdate();
+
+            if(rowsInserted != 0) {
+                return true;
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
 
     }
 

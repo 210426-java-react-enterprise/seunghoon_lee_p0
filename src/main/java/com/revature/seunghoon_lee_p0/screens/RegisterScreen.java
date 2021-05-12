@@ -54,9 +54,7 @@ public class RegisterScreen extends Screen {
             System.out.println("Username or Email already in use!");
             //e.printStackTrace();
         } catch(Exception e) {
-            System.out.println("Unknown Error!");
-            app().finishApp();
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
     }

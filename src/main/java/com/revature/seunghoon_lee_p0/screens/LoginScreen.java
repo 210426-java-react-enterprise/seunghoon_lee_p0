@@ -1,9 +1,9 @@
 package com.revature.seunghoon_lee_p0.screens;
 
-import com.revature.seunghoon_lee_p0.daos.AccountDAO;
 import com.revature.seunghoon_lee_p0.exceptions.AuthenticationException;
 import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
 import com.revature.seunghoon_lee_p0.models.Customer;
+import com.revature.seunghoon_lee_p0.services.AccountService;
 import com.revature.seunghoon_lee_p0.services.LoginService;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
@@ -14,14 +14,16 @@ public class LoginScreen extends Screen {
     private BufferedReader consoleReader;
     private ScreenRouter router;
     private LoginService loginService;
+    private AccountService accountService;
     private Customer currentCustomer;
-    private AccountDAO accountDAO;
 
-    public LoginScreen(BufferedReader consoleReader, ScreenRouter router, LoginService loginService) {
+    public LoginScreen(BufferedReader consoleReader, ScreenRouter router, LoginService loginService, AccountService accountService) {
         super("LoginScreen", "/login");
         this.consoleReader = consoleReader;
         this.router = router;
         this.loginService = loginService;
+        this.accountService = accountService;
+        this.currentCustomer = null;
     }
 
     @Override
@@ -42,14 +44,8 @@ public class LoginScreen extends Screen {
             currentCustomer = loginService.authenticate(username, password);
             if(currentCustomer != null) {
 
+                accountService.setCurrentCustomer(currentCustomer);
                 System.out.println("Login Successful!");
-                accountDAO = new AccountDAO(currentCustomer);
-
-                router.addScreen(new DashboardScreen(consoleReader, router, accountDAO))
-                      .addScreen(new CreateAccountScreen(consoleReader, router, accountDAO))
-                      .addScreen(new DepositScreen(consoleReader, router, accountDAO))
-                      .addScreen(new WithdrawScreen(consoleReader, router, accountDAO));
-
                 router.navigate("/dashboard");
 
             }

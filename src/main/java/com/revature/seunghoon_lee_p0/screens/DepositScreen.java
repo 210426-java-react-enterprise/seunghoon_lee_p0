@@ -1,23 +1,22 @@
 package com.revature.seunghoon_lee_p0.screens;
 
-import com.revature.seunghoon_lee_p0.daos.AccountDAO;
+import com.revature.seunghoon_lee_p0.services.AccountService;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
-import static com.revature.seunghoon_lee_p0.Driver.app;
 
 public class DepositScreen extends Screen {
 
     private BufferedReader consoleReader;
     private ScreenRouter router;
-    private AccountDAO accountDAO;
+    private AccountService accountService;
 
-    public DepositScreen(BufferedReader consoleReader, ScreenRouter router, AccountDAO accountDAO) {
+    public DepositScreen(BufferedReader consoleReader, ScreenRouter router, AccountService accountService) {
         super("DepositScreen", "/deposit");
         this.consoleReader = consoleReader;
         this.router = router;
-        this.accountDAO = accountDAO;
+        this.accountService = accountService;
     }
 
     @Override
@@ -25,14 +24,19 @@ public class DepositScreen extends Screen {
 
         try {
 
+            System.out.print("Amount: ");
+            double amount = Double.parseDouble(consoleReader.readLine());
+            if (accountService.saveTransaction("deposit", amount)) {
+                System.out.println("Deposit succeeded!");
+            } else {
+                System.out.println("Deposit failed!");
+            }
 
         } catch (Exception e) {
             System.out.println("Unkown Error!");
-            app().finishApp();
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
     }
-
 
 }

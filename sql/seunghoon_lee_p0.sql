@@ -31,12 +31,30 @@ drop table if exists "accounts";
 
 create table "accounts" (
 	"account_id" serial,
-	"customer_id" int,
-	"balance" numeric(10, 2) ,
+	"customer_id" int not null,
+	"balance" numeric(10, 2) check (balance >= 0.0),
 	constraint "pk_account" primary key("account_id")
 );
 
 alter table "accounts" add constraint "fk_accouts_customer_id"
 	foreign key ("customer_id") references "customers" ("customer_id");
 	
-insert into lee_bank.accounts (customer_id, balance) values(1,0.0);
+drop table if exists "transactions";
+
+create table "transactions" (
+	"transaction_id" serial,
+	"date" date not null,
+	"account_id" int not null,
+	"customer_id" int not null,
+	"type" varchar(10) not null,
+	"amount" numeric(10, 2) not null,
+	"balance" numeric(10, 2) not null,
+	constraint "pk_transaction" primary key("transaction_id")
+);
+	
+alter table "transactions" add constraint "fk_transactions_account_id"
+	foreign key ("account_id") references "accounts" ("account_id");
+
+alter table "transactions" add constraint "fk_transactions_customer_id"
+	foreign key ("customer_id") references "customers" ("customer_id");
+

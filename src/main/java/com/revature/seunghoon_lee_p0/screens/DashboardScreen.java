@@ -1,33 +1,31 @@
 package com.revature.seunghoon_lee_p0.screens;
 
-import com.revature.seunghoon_lee_p0.daos.AccountDAO;
+import com.revature.seunghoon_lee_p0.services.AccountService;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
-
-import static com.revature.seunghoon_lee_p0.Driver.app;
 
 public class DashboardScreen extends Screen {
 
     private BufferedReader consoleReader;
     private ScreenRouter router;
-    private AccountDAO accountDAO;
+    private AccountService accountService;
 
-    public DashboardScreen(BufferedReader consoleReader, ScreenRouter router, AccountDAO accountDAO) {
+    public DashboardScreen(BufferedReader consoleReader, ScreenRouter router, AccountService accountService) {
         super("DashboardScreen", "/dashboard");
         this.consoleReader = consoleReader;
         this.router = router;
-        this.accountDAO = accountDAO;
+        this.accountService = accountService;
     }
 
     @Override
     public void render() {
 
         System.out.println("Please select your choice.");
-        System.out.println("1) Create new account");
+        System.out.println("1) View transaction history ");
         System.out.println("2) Deposit");
         System.out.println("3) Withdraw");
-        System.out.println("4) Log out");
+        System.out.println("4) Create new account");
 
         try{
 
@@ -37,7 +35,7 @@ public class DashboardScreen extends Screen {
             switch (userSelection) {
 
                 case "1":
-                    router.navigate("/createAccount");
+                    router.navigate("/transaction");
                     break;
                 case "2":
                     router.navigate("/deposit");
@@ -46,7 +44,7 @@ public class DashboardScreen extends Screen {
                     router.navigate("/withdraw");
                     break;
                 case "4":
-                    app().finishApp();
+                    router.navigate("/createAccount");
                     break;
                 default:
                     System.out.println("Invalid selection!");
@@ -56,6 +54,5 @@ public class DashboardScreen extends Screen {
         catch(Exception e) {
             e.printStackTrace();
         }
-
     }
 }
