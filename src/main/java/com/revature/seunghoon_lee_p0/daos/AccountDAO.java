@@ -1,7 +1,9 @@
 package com.revature.seunghoon_lee_p0.daos;
 
 import com.revature.seunghoon_lee_p0.models.Account;
+import com.revature.seunghoon_lee_p0.models.Transaction;
 import com.revature.seunghoon_lee_p0.util.ConnectionFactory;
+import com.revature.seunghoon_lee_p0.util.LinkedList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -81,6 +83,39 @@ public class AccountDAO {
             e.printStackTrace();
         }
         return false;
+
+    }
+
+    public LinkedList<Transaction> getTransactions(int account_id) {
+
+        LinkedList<Transaction> transactions = new LinkedList<>();
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "select * from lee_bank.transactions where account_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, account_id);
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                Transaction t = new Transaction(
+                        rs.getInt("transaction_id"),
+                        rs.getString("date"),
+                        rs.getInt("account_id"),
+                        rs.getInt("customer_id"),
+                        rs.getString("type"),
+                        rs.getDouble("amount"),
+                        rs.getDouble("balance")
+                );
+                transactions.add(t);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return transactions;
 
     }
 

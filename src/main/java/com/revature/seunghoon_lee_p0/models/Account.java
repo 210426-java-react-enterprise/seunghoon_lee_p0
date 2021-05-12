@@ -50,4 +50,13 @@ public class Account {
         return false;
     };
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", customerId=" + customerId +
+                ", balance=" + balance +
+                '}';
+    }
+
 }

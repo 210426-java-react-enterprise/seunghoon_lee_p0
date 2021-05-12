@@ -76,4 +76,17 @@ public class Transaction {
         this.balance = balance;
     }
 
+    @Override
+    public String toString() {
+        return '{' + '\"' +
+                transactionId + "\", \"" +
+                date + "\", \"" +
+                accountId + "\", \"" +
+                customerId + "\", \"" +
+                type + "\", \"" +
+                amount + "\", \"" +
+                balance + '\"' +
+                '}';
+    }
+
 }

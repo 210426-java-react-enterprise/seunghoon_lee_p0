@@ -4,9 +4,7 @@ import com.revature.seunghoon_lee_p0.daos.AccountDAO;
 import com.revature.seunghoon_lee_p0.models.Account;
 import com.revature.seunghoon_lee_p0.models.Customer;
 import com.revature.seunghoon_lee_p0.models.Transaction;
-
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import com.revature.seunghoon_lee_p0.util.LinkedList;
 
 public class AccountService {
 
@@ -58,6 +56,12 @@ public class AccountService {
             return true;
         }
         return false;
+
+    }
+
+    public LinkedList<Transaction> getTransactionHistory() {
+
+        return accountDAO.getTransactions(currentAccount.getAccountId());
 
     }
 
