@@ -21,6 +21,15 @@ public class DashboardScreen extends Screen {
     @Override
     public void render() {
 
+        accountService.setCustomerAccounts();
+        int nAccounts = accountService.getCustomerAccounts().size();
+        if( nAccounts > 0) {
+            System.out.println("You have " + nAccounts + " checking account!");
+            accountService.setCurrentAccount();
+        } else {
+            System.out.println("No account found!");
+        }
+
         System.out.println("Please select your choice.");
         System.out.println("1) View transaction history ");
         System.out.println("2) Deposit");

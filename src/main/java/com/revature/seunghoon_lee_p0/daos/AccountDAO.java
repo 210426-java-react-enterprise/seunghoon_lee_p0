@@ -33,18 +33,17 @@ public class AccountDAO {
 
     }
 
-    public Account getAccount(int customerId) {
+    public Account getAccount(int accountId) {
 
         Account account = null;
-
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "select * from lee_bank.accounts where customer_id = ?";
+            String sql = "select * from lee_bank.accounts where account_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, customerId);
+            pstmt.setInt(1, accountId);
             ResultSet rs = pstmt.executeQuery();
 
-            while(rs.next()) {
+            if(rs.next()) {
                 account = new Account(
                         rs.getInt("account_id"),
                         rs.getInt("customer_id"),
@@ -57,6 +56,34 @@ public class AccountDAO {
         }
 
         return account;
+
+    }
+
+    public LinkedList<Account> getAccounts(int customerId) {
+
+        LinkedList<Account> accounts = new LinkedList<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "select * from lee_bank.accounts where customer_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, customerId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                Account a = new Account(
+                        rs.getInt("account_id"),
+                        rs.getInt("customer_id"),
+                        rs.getDouble("balance")
+                );
+                accounts.add(a);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return accounts;
 
     }
 
