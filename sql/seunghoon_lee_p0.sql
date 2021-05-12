@@ -13,27 +13,31 @@ select current_user, session_user; --slee, slee
 set search_path to lee_bank;
 show search_path;
 
+
+
+-- start from here
+select current_user, session_user; --postgres, postgres
+set search_path to lee_bank;
+show search_path;
+
+
 drop table if exists "customers";
 
 create table "customers" (
-	"customer_id" serial, 
-	"username" varchar(25) unique, not null,
+	"customer_id" serial primary key, 
+	"username" varchar(25) unique not null,
 	"password" varchar(255) not null,
 	"first_name" varchar(25) not null,
 	"last_name" varchar(25) not null,
-	"email" varchar(25) unique, not null
-	constraint "pk_customer" primary key ("customer_id");
+	"email" varchar(25) unique not null
 );
-
-select * from lee_bank."customers";
 
 drop table if exists "accounts";
 
 create table "accounts" (
-	"account_id" serial,
+	"account_id" serial primary key,
 	"customer_id" int not null,
-	"balance" numeric(10, 2) check (balance >= 0.0),
-	constraint "pk_account" primary key("account_id")
+	"balance" numeric(10, 2) check (balance >= 0.0)
 );
 
 alter table "accounts" add constraint "fk_accouts_customer_id"
@@ -42,14 +46,13 @@ alter table "accounts" add constraint "fk_accouts_customer_id"
 drop table if exists "transactions";
 
 create table "transactions" (
-	"transaction_id" serial,
-	"date" date not null,
+	"transaction_id" serial primary key,
+	"date" date not null default current_date,
 	"account_id" int not null,
 	"customer_id" int not null,
 	"type" varchar(10) not null,
 	"amount" numeric(10, 2) not null,
-	"balance" numeric(10, 2) not null,
-	constraint "pk_transaction" primary key("transaction_id")
+	"balance" numeric(10, 2) not null
 );
 	
 alter table "transactions" add constraint "fk_transactions_account_id"

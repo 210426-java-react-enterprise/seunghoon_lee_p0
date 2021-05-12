@@ -18,9 +18,9 @@ public class CustomerDAO {
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] { "customer_id"});
             pstmt.setString(1, newCustomer.getUsername());
             pstmt.setString(2, newCustomer.getPassword());
-            pstmt.setString(4, newCustomer.getFirstName());
-            pstmt.setString(5, newCustomer.getLastName());
-            pstmt.setString(3, newCustomer.getEmail());
+            pstmt.setString(3, newCustomer.getFirstName());
+            pstmt.setString(4, newCustomer.getLastName());
+            pstmt.setString(5, newCustomer.getEmail());
             int rowsInserted = pstmt.executeUpdate();
 
             if(rowsInserted != 0) {
