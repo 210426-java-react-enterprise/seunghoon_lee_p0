@@ -14,6 +14,8 @@ select current_user, session_user; --slee, slee
 set search_path to lee_bank;
 show search_path;
 
+drop table if exists "transactions";
+drop table if exists "accounts";
 drop table if exists "customers";
 
 create table "customers" (
@@ -25,8 +27,6 @@ create table "customers" (
 	"email" varchar(25) unique not null
 );
 
-drop table if exists "accounts";
-
 create table "accounts" (
 	"account_id" serial primary key,
 	"customer_id" int not null,
@@ -36,8 +36,6 @@ create table "accounts" (
 alter table "accounts" add constraint "fk_accouts_customer_id"
 	foreign key ("customer_id") references "customers" ("customer_id");
 	
-drop table if exists "transactions";
-
 create table "transactions" (
 	"transaction_id" serial primary key,
 	"date" date not null default current_date,
