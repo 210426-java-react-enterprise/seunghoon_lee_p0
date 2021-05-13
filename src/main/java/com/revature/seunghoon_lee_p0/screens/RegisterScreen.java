@@ -9,6 +9,11 @@ import java.io.BufferedReader;
 
 import static com.revature.seunghoon_lee_p0.Driver.app;
 
+/**
+ * Gets customer information
+ * Validate customer inputs
+ * Register the customer if inputs are validated
+ */
 public class RegisterScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -20,6 +25,10 @@ public class RegisterScreen extends Screen {
         this.registerService = registerService;
     }
 
+    /**
+     * Renders screen
+     * to get customer information to register
+     */
     @Override
     public void render() {
 
@@ -52,13 +61,11 @@ public class RegisterScreen extends Screen {
             System.out.println("Successfully registered!");
 
         } catch(InvalidRequestException e) {
-            System.out.println("Invalid input!");
-            //e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch(ResourcePersistenceException e) {
-            System.out.println("Username or Email already in use!");
-            //e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch(Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }

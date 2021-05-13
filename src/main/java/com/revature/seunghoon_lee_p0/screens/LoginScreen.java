@@ -9,6 +9,11 @@ import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
+/**
+ * Gets customer input to log in
+ * Validate user credentials
+ * Navigate to dashboard screen if the customer is authenticated
+ */
 public class LoginScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -26,6 +31,10 @@ public class LoginScreen extends Screen {
         this.currentCustomer = null;
     }
 
+    /**
+     * Renders screen
+     * to get customer credentials to login and navigate to dashboard screen
+     */
     @Override
     public void render() {
 

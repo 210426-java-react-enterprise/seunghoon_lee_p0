@@ -1,5 +1,9 @@
 package com.revature.seunghoon_lee_p0.models;
 
+/**
+ * POJO for Customer
+ *
+ */
 public class Customer {
     private int customerId;
     String username;

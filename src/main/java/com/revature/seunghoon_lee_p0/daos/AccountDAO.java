@@ -10,8 +10,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Data Access Object for account and transaction table in aws postgresql database
+ */
 public class AccountDAO {
 
+    /**
+     * Inserts account data int accounts table based on customer_id
+     *
+     * @param customerId
+     * @return a boolean which tells if insertion succeeded or not
+     */
     public boolean insertAccount(int customerId)  {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -33,6 +42,12 @@ public class AccountDAO {
 
     }
 
+    /**
+     * Gets the Account from accounts table base on account_id
+     *
+     * @param accountId
+     * @return Account
+     */
     public Account getAccount(int accountId) {
 
         Account account = null;
@@ -59,6 +74,12 @@ public class AccountDAO {
 
     }
 
+    /**
+     * gets the list of Accounts from accounts table based on customer_id
+     *
+     * @param customerId
+     * @return LinkedList<Account>
+     */
     public LinkedList<Account> getAccounts(int customerId) {
 
         LinkedList<Account> accounts = new LinkedList<>();
@@ -87,6 +108,13 @@ public class AccountDAO {
 
     }
 
+    /**
+     * Updates balance in account table base on transaction
+     *
+     * @param accountId
+     * @param balance
+     * @return Boolean
+     */
     public boolean updateAccountBalance(int accountId, double balance) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -108,6 +136,16 @@ public class AccountDAO {
 
     }
 
+    /**
+     * Inserts transaction into transactions table based on customer input data
+     *
+     * @param accountId
+     * @param customerId
+     * @param type
+     * @param amount
+     * @param balance
+     * @return Boolean which tells if insertion succeeded or not
+     */
     public boolean insertTransaction(int accountId, int customerId, String type, double amount, double balance) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -134,6 +172,12 @@ public class AccountDAO {
 
     }
 
+    /**
+     * Gets transaction history from transaction table based on account_id
+     *
+     * @param account_id
+     * @return LinkedList<Transaction>
+     */
     public LinkedList<Transaction> getTransactions(int account_id) {
 
         LinkedList<Transaction> transactions = new LinkedList<>();

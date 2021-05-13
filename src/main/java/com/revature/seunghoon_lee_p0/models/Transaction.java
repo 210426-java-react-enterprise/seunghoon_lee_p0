@@ -1,5 +1,8 @@
 package com.revature.seunghoon_lee_p0.models;
 
+/**
+ * POJO for Transaction
+ */
 public class Transaction {
 
     private int transactionId;

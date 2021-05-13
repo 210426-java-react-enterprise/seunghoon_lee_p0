@@ -7,6 +7,9 @@ import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
+/**
+ * Show transaction history
+ */
 public class TransactionScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -20,6 +23,10 @@ public class TransactionScreen extends Screen {
         this.accountService = accountService;
     }
 
+    /**
+     * Renders screen
+     * to show transaction history
+     */
     @Override
     public void render() {
 

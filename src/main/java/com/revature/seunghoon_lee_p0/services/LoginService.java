@@ -5,6 +5,10 @@ import com.revature.seunghoon_lee_p0.exceptions.AuthenticationException;
 import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
 import com.revature.seunghoon_lee_p0.models.Customer;
 
+/**
+ * Validates customer inputs
+ * Calls methods to authenticate customer through interaction with database
+ */
 public class LoginService {
 
     private CustomerDAO customerDAO;
@@ -13,6 +17,13 @@ public class LoginService {
         this.customerDAO = customerDAO;
     }
 
+    /**
+     * Validates user input to login
+     *
+     * @param username
+     * @param password
+     * @return Customer
+     */
     public Customer authenticate(String username, String password) {
 
         if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {

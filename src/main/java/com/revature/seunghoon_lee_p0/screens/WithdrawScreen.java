@@ -5,7 +5,10 @@ import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
-
+/**
+ * Gets ammount to withdraw from customer
+ * Save transaction data
+ */
 public class WithdrawScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -19,6 +22,10 @@ public class WithdrawScreen extends Screen {
         this.accountService = accountService;
     }
 
+    /**
+     * Renders screen
+     * to get amount to withdraw form customer and save it into transaction table
+     */
     @Override
     public void render() {
 

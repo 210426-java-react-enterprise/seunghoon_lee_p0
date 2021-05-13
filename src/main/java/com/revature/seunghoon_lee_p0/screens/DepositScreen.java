@@ -5,7 +5,10 @@ import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
-
+/**
+ * Gets ammount to deposit from customer
+ * Save transaction data
+ */
 public class DepositScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -19,6 +22,10 @@ public class DepositScreen extends Screen {
         this.accountService = accountService;
     }
 
+    /**
+     * Renders screen
+     * to get amount to deposit form customer and save it into transaction table
+     */
     @Override
     public void render() {
 

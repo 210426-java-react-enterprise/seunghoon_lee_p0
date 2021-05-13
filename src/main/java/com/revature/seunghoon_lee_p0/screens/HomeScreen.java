@@ -4,6 +4,10 @@ import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 import static com.revature.seunghoon_lee_p0.Driver.app;
 import java.io.BufferedReader;
 
+/**
+ * Show main menu for customer to select
+ * Navigate to selected screen
+ */
 public class HomeScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -15,6 +19,10 @@ public class HomeScreen extends Screen {
         this.router = router;
     }
 
+    /**
+     * Renders screen
+     * to show main menu and get user selection
+     */
     @Override
     public void render() {
 

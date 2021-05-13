@@ -10,6 +10,10 @@ import com.revature.seunghoon_lee_p0.services.RegisterService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * Creates screen router
+ * Check the state of app to start and finish and to control the flow of screen
+ */
 public class AppState {
 
     private final ScreenRouter router;
@@ -38,6 +42,9 @@ public class AppState {
               .addScreen(new WithdrawScreen(consoleReader, router, accountService));
     }
 
+    /**
+     * Starts app from home screen and controls the flow
+     */
     public void startApp() {
         System.out.println("\nWelcome to Lee Bank!");
         while (isRunning) {
@@ -45,6 +52,9 @@ public class AppState {
         }
     }
 
+    /**
+     * Finishes app
+     */
     public void finishApp() {
         System.out.println("\nGoodbye!");
         this.isRunning = false;

@@ -7,6 +7,12 @@ import java.io.BufferedReader;
 
 import static com.revature.seunghoon_lee_p0.Driver.app;
 
+/**
+ * Gets user input to select account type
+ * Creates new Account
+ * Currently only one account is available
+ * Should be updated to have multiple accounts and multiple types
+ */
 public class CreateAccountScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -20,6 +26,10 @@ public class CreateAccountScreen extends Screen {
         this.accountService = accountService;
     }
 
+    /**
+     * Renders screen
+     * Gets user input to create new account
+     */
     @Override
     public void render() {
 

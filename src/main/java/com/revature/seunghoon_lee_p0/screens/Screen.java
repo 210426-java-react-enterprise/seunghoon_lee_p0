@@ -1,5 +1,9 @@
 package com.revature.seunghoon_lee_p0.screens;
 
+/**
+ * Parent class for all screen classes
+ * Has abstract method, render()
+ */
 public abstract class Screen {
 
     protected String name;

@@ -6,6 +6,11 @@ import com.revature.seunghoon_lee_p0.models.Customer;
 import com.revature.seunghoon_lee_p0.models.Transaction;
 import com.revature.seunghoon_lee_p0.util.LinkedList;
 
+/**
+ * Validates customer inputs
+ * Calls methods to communicate with tables related to account and transaction in database
+ * Holds current authenticated customer information during login
+ */
 public class AccountService {
 
     private AccountDAO accountDAO;
@@ -19,6 +24,11 @@ public class AccountService {
         this.accountDAO = accountDAO;
     }
 
+    /**
+     * Tells if the customer logged in
+     *
+     * @return Boolean
+     */
     public boolean isLoggedIn() {
         return isLoggedIn;
     }
@@ -36,10 +46,22 @@ public class AccountService {
         return currentCustomer;
     }
 
+    /**
+     * Gets account information from database and sets Account
+     */
     public void setCustomerAccounts() {
         customerAccounts = accountDAO.getAccounts(currentCustomer.getCustomerId());
     }
 
+    public Account getCurrentAccount() {
+        return currentAccount;
+    }
+
+    /**
+     * Sets current account among customers multiple accounts
+     * Currently not implemented
+     * Need to be updated
+     */
     public void setCurrentAccount() {
         // need to be updated
         if(customerAccounts.peek() != null) {
@@ -49,14 +71,11 @@ public class AccountService {
         }
     }
 
-    public Account getCurrentAccount() {
-        return currentAccount;
-    }
-
-    public void updateCurrentAccount() {
-        currentAccount = accountDAO.getAccount(currentAccount.getAccountId());
-    }
-
+    /**
+     * Inserts new account into account table in database
+     *
+     * @return Boolean which tells the insertion succeeded or not
+     */
     public boolean createAccount() {
         if(accountDAO.insertAccount(currentCustomer.getCustomerId())) {
             setCurrentAccount();
@@ -65,6 +84,13 @@ public class AccountService {
         return false;
     }
 
+    /**
+     * Inserts new transaction record into transactions table in database
+     *
+     * @param type
+     * @param amount
+     * @return Boolean which tells the insertion succeeded or not
+     */
     public boolean saveTransaction(String type, double amount) {
 
         double balance = currentAccount.getBalance();
@@ -92,6 +118,11 @@ public class AccountService {
 
     }
 
+    /**
+     * Gets transaction records based on current account_id
+     *
+     * @return LinkedList<Transaction>
+     */
     public LinkedList<Transaction> getTransactionHistory() {
         return accountDAO.getTransactions(currentAccount.getAccountId());
     }

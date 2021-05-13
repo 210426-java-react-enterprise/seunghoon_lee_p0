@@ -1,5 +1,10 @@
 package com.revature.seunghoon_lee_p0.models;
 
+/**
+ * POJO for Account
+ * currently customer can hold only one account.
+ * should be updated to have multiple accounts.
+ */
 public class Account {
 
     private int accountId;

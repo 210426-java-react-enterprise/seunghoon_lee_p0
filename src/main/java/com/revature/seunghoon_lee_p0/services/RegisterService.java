@@ -5,6 +5,10 @@ import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
 import com.revature.seunghoon_lee_p0.exceptions.ResourcePersistenceException;
 import com.revature.seunghoon_lee_p0.models.Customer;
 
+/**
+ * Validates customer inputs
+ * Calls methods to register customer through interaction with database
+ */
 public class RegisterService {
 
     private CustomerDAO customerDao;
@@ -13,6 +17,14 @@ public class RegisterService {
         this.customerDao = customerDao;
     }
 
+    /**
+     * Validates user input to register new customer
+     *
+     * @param newCustomer
+     * @return
+     * @throws InvalidRequestException
+     * @throws ResourcePersistenceException
+     */
     public Customer register(Customer newCustomer) throws InvalidRequestException, ResourcePersistenceException {
         if (!isUserValid(newCustomer)) {
             throw new InvalidRequestException("Invalid data provided for new customer!");
@@ -29,6 +41,11 @@ public class RegisterService {
         return customerDao.save(newCustomer);
     }
 
+    /**
+     * Validation check
+     * @param customer
+     * @return
+     */
     public boolean isUserValid(Customer customer) {
 
         if (customer == null) return false;

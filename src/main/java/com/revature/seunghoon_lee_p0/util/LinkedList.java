@@ -1,5 +1,10 @@
 package com.revature.seunghoon_lee_p0.util;
 
+/**
+ * Custom LinkedList
+ *
+ * @param <T>
+ */
 public class LinkedList<T> implements List<T>, Queue<T> {
 
     private int size;

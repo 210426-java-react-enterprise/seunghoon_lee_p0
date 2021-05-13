@@ -8,6 +8,10 @@ import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
+/**
+ * Shows current account and menu to select
+ * Navigate to selected screen
+ */
 public class DashboardScreen extends Screen {
 
     private BufferedReader consoleReader;
@@ -23,6 +27,10 @@ public class DashboardScreen extends Screen {
         this.accountService = accountService;
     }
 
+    /**
+     * Renders screen
+     * to show account information of current customer and menu to select and navigate
+     */
     @Override
     public void render() {
 

@@ -8,6 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Data Access Object for customer table in aws postgresql database
+ */
 public class CustomerDAO {
 
     public Customer save(Customer newCustomer) {
@@ -36,6 +39,12 @@ public class CustomerDAO {
         return newCustomer;
     }
 
+    /**
+     * Tells if the username is registered in customers table
+     *
+     * @param username
+     * @return Boolean
+     */
     public boolean isUsernameAvailable(String username) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -56,6 +65,12 @@ public class CustomerDAO {
         return true;
     }
 
+    /**
+     * Tells if the email is registered in customers table
+     *
+     * @param email
+     * @return Boolean
+     */
     public boolean isEmailAvailable(String email) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -77,6 +92,13 @@ public class CustomerDAO {
 
     }
 
+    /**
+     * Find a customer in customers table by username and password
+     *
+     * @param username
+     * @param password
+     * @return Customer
+     */
     public Customer findCustomerByUsernameAndPassword(String username, String password) {
 
         Customer customer = null;

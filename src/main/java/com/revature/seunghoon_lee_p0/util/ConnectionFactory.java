@@ -7,6 +7,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Creates connection object to communicate with AWS postgresal database
+ * Singleton/Factory Design pattern is applied
+ *
+ */
 public class ConnectionFactory {
 
     private static ConnectionFactory connectionFactory;
@@ -21,6 +26,9 @@ public class ConnectionFactory {
         }
     }
 
+    /**
+     * Loads information from properties file for connection
+     */
     private ConnectionFactory() {
         try {
             props.load(new FileReader("src/main/resources/application.properties"));
@@ -30,6 +38,11 @@ public class ConnectionFactory {
         }
     }
 
+    /**
+     * Connection Factory to implement Singleton
+     *
+     * @return
+     */
     public static ConnectionFactory getInstance() {
         if (connectionFactory == null) {
             connectionFactory = new ConnectionFactory();
@@ -38,6 +51,11 @@ public class ConnectionFactory {
         return connectionFactory;
     }
 
+    /**
+     * Creates connection instance
+     *
+     * @return
+     */
     public Connection getConnection() {
         Connection conn = null;
 
