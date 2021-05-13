@@ -66,11 +66,9 @@ public class LoginScreen extends Screen {
             currentCustomer = null;
 
         } catch (InvalidRequestException e) {
-            System.out.println("Invalid username or password!");
-            //e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (AuthenticationException e) {
-            System.out.println("Could not find that username or password!");
-            //e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
