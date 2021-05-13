@@ -42,6 +42,8 @@ public class TransactionScreen extends Screen {
                 System.out.format(record, date, type, amount, balance);
             } while(transactions.peek() != null);
 
+            System.out.print("Press any key to go back to Dashboard.");
+            consoleReader.readLine();
         } catch(Exception e) {
             e.printStackTrace();
         }

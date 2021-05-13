@@ -5,7 +5,6 @@ import com.revature.seunghoon_lee_p0.models.Account;
 import com.revature.seunghoon_lee_p0.models.Customer;
 import com.revature.seunghoon_lee_p0.models.Transaction;
 import com.revature.seunghoon_lee_p0.util.LinkedList;
-import sun.awt.image.ImageWatched;
 
 public class AccountService {
 
@@ -13,31 +12,48 @@ public class AccountService {
     private Customer currentCustomer;
     private LinkedList<Account> customerAccounts;
     private Account currentAccount;
+    private boolean isLoggedIn;
 
-    public AccountService(AccountDAO accountDAO) {
+    public AccountService(AccountDAO accountDAO)
+    {
         this.accountDAO = accountDAO;
+    }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
 
     public void setCurrentCustomer(Customer currentCustomer) {
         this.currentCustomer = currentCustomer;
+        isLoggedIn = true;
     }
 
-    public LinkedList<Account> getCustomerAccounts() {
+    public LinkedList<Account> getCurrentCustomerAccounts() {
         return customerAccounts;
     }
 
+    public Customer getCurrentCustomer() {
+        return currentCustomer;
+    }
+
     public void setCustomerAccounts() {
-        this.customerAccounts = accountDAO.getAccounts(currentCustomer.getCustomerId());
+        customerAccounts = accountDAO.getAccounts(currentCustomer.getCustomerId());
     }
 
-    public boolean setCurrentAccount() {
+    public void setCurrentAccount() {
         // need to be updated
-        currentAccount = customerAccounts.get(0);
-
-        return true;
+        if(customerAccounts.peek() != null) {
+            currentAccount = customerAccounts.peek();
+        } else {
+            currentAccount = null;
+        }
     }
 
-    public void updateAccount() {
+    public Account getCurrentAccount() {
+        return currentAccount;
+    }
+
+    public void updateCurrentAccount() {
         currentAccount = accountDAO.getAccount(currentAccount.getAccountId());
     }
 
@@ -61,12 +77,15 @@ public class AccountService {
                 break;
         }
 
-        boolean result =
+        boolean transactionUpdate =
             accountDAO.insertTransaction(
                     currentAccount.getAccountId(), currentCustomer.getCustomerId(), type, amount, balance
             );
-        if (result) {
-            updateAccount();
+        boolean accountBalanceUpdate =
+            accountDAO.updateAccountBalance(
+                    currentAccount.getAccountId(), balance
+            );
+        if (transactionUpdate && accountBalanceUpdate) {
             return true;
         }
         return false;
@@ -74,14 +93,14 @@ public class AccountService {
     }
 
     public LinkedList<Transaction> getTransactionHistory() {
-
         return accountDAO.getTransactions(currentAccount.getAccountId());
-
     }
 
     public void logOut() {
         this.currentAccount = null;
+        this.customerAccounts = null;
         this.currentCustomer = null;
+        isLoggedIn = false;
     }
 
 }

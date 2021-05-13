@@ -34,6 +34,9 @@ public class LoginScreen extends Screen {
             String username;
             String password;
 
+            System.out.println("\nLog In");
+            System.out.println("----------------------------------------------------------------------");
+
             System.out.println("Please enter your username and password.");
 
             System.out.print("Username: ");
@@ -43,12 +46,15 @@ public class LoginScreen extends Screen {
 
             currentCustomer = loginService.authenticate(username, password);
             if(currentCustomer != null) {
-
                 accountService.setCurrentCustomer(currentCustomer);
                 System.out.println("Login Successful!");
-                router.navigate("/dashboard");
-
             }
+
+            while(accountService.isLoggedIn()) {
+                router.navigate("/dashboard");
+            }
+
+            currentCustomer = null;
 
         } catch (InvalidRequestException e) {
             System.out.println("Invalid username or password!");

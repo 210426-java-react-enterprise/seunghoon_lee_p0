@@ -24,6 +24,9 @@ public class WithdrawScreen extends Screen {
 
         try {
 
+            System.out.println("\nWithdraw");
+            System.out.println("----------------------------------------------------------------------");
+
             System.out.print("Amount: ");
             double amount = Double.parseDouble(consoleReader.readLine());
             if (accountService.saveTransaction("withdraw", amount)) {

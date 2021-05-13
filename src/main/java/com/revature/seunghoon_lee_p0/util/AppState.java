@@ -14,6 +14,7 @@ public class AppState {
 
     private final ScreenRouter router;
     private boolean isRunning;
+    private boolean isLoggedIn;
 
     public AppState() {
 
@@ -31,20 +32,21 @@ public class AppState {
               .addScreen(new RegisterScreen(consoleReader, registerService))
               .addScreen(new LoginScreen(consoleReader, router, loginService, accountService))
               .addScreen(new DashboardScreen(consoleReader, router, accountService))
+              .addScreen(new TransactionScreen(consoleReader, router, accountService))
               .addScreen(new CreateAccountScreen(consoleReader, router, accountService))
               .addScreen(new DepositScreen(consoleReader, router, accountService))
               .addScreen(new WithdrawScreen(consoleReader, router, accountService));
     }
 
     public void startApp() {
-        System.out.println("Welcome to Lee Bank!");
+        System.out.println("\nWelcome to Lee Bank!");
         while (isRunning) {
             router.navigate("/home");
         }
     }
 
     public void finishApp() {
-        System.out.println("Goodbye!");
+        System.out.println("\nGoodbye!");
         this.isRunning = false;
     }
 

@@ -1,5 +1,5 @@
 --select aws-postgresql
-
+--prepare
 select current_user, session_user; --postgres, postgres
 create schema lee_bank;
 alter schema lee_bank owner to slee;
@@ -7,19 +7,12 @@ alter schema lee_bank owner to slee;
 grant usage on all tables in schema lee_bank to slee;
 grant all privileges on schema lee_bank to slee;
 
+--start from here
 --select aws-postgresql-slee
 
 select current_user, session_user; --slee, slee
 set search_path to lee_bank;
 show search_path;
-
-
-
--- start from here
-select current_user, session_user; --postgres, postgres
-set search_path to lee_bank;
-show search_path;
-
 
 drop table if exists "customers";
 

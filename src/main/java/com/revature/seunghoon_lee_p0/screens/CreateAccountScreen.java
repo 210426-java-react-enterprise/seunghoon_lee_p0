@@ -25,6 +25,9 @@ public class CreateAccountScreen extends Screen {
 
         try {
 
+            System.out.println("\nCreate new Account");
+            System.out.println("----------------------------------------------------------------------");
+
             System.out.println("Please select your choice.");
             System.out.println("1) Checking account");
             System.out.println("2) Saving account");
@@ -49,7 +52,6 @@ public class CreateAccountScreen extends Screen {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        router.navigate("/dashboard");
 
     }
 }

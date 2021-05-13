@@ -87,6 +87,27 @@ public class AccountDAO {
 
     }
 
+    public boolean updateAccountBalance(int accountId, double balance) {
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "update lee_bank.accounts set balance = ? where account_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setDouble(1, balance);
+            pstmt.setInt(2, accountId);
+            int rowsInserted = pstmt.executeUpdate();
+
+            if(rowsInserted != 0) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
     public boolean insertTransaction(int accountId, int customerId, String type, double amount, double balance) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {

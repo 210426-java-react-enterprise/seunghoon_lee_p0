@@ -23,6 +23,8 @@ public class DepositScreen extends Screen {
     public void render() {
 
         try {
+            System.out.println("\nDeposit");
+            System.out.println("----------------------------------------------------------------------");
 
             System.out.print("Amount: ");
             double amount = Double.parseDouble(consoleReader.readLine());
