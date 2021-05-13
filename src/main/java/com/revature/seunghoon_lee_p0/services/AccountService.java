@@ -1,6 +1,9 @@
 package com.revature.seunghoon_lee_p0.services;
 
 import com.revature.seunghoon_lee_p0.daos.AccountDAO;
+import com.revature.seunghoon_lee_p0.exceptions.InvalidRequestException;
+import com.revature.seunghoon_lee_p0.exceptions.NegativeAmountTransactionException;
+import com.revature.seunghoon_lee_p0.exceptions.OverdarftException;
 import com.revature.seunghoon_lee_p0.models.Account;
 import com.revature.seunghoon_lee_p0.models.Customer;
 import com.revature.seunghoon_lee_p0.models.Transaction;
@@ -85,6 +88,7 @@ public class AccountService {
     }
 
     /**
+     * Validates customer input
      * Inserts new transaction record into transactions table in database
      *
      * @param type
@@ -93,6 +97,9 @@ public class AccountService {
      */
     public boolean saveTransaction(String type, double amount) {
 
+        if(amount < 0) {
+            throw new NegativeAmountTransactionException("Transaction failed! Negative amount is not allowed!");
+        }
         double balance = currentAccount.getBalance();
         switch(type) {
             case "deposit" :
@@ -101,6 +108,9 @@ public class AccountService {
             case "withdraw" :
                 balance = balance - amount;
                 break;
+        }
+        if(balance < 0) {
+            throw new OverdarftException("Transaction failed! Overdraft is not allowed!");
         }
 
         boolean transactionUpdate =

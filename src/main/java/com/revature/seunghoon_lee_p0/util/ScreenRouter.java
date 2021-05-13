@@ -35,7 +35,7 @@ public class ScreenRouter {
 
     /**
      * Navigate to specific screen by route
-     * 
+     *
      * @param route
      */
     public void navigate(String route) {

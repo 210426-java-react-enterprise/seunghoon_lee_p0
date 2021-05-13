@@ -1,5 +1,7 @@
 package com.revature.seunghoon_lee_p0.screens;
 
+import com.revature.seunghoon_lee_p0.exceptions.NegativeAmountTransactionException;
+import com.revature.seunghoon_lee_p0.exceptions.OverdarftException;
 import com.revature.seunghoon_lee_p0.services.AccountService;
 import com.revature.seunghoon_lee_p0.util.ScreenRouter;
 
@@ -41,8 +43,11 @@ public class DepositScreen extends Screen {
                 System.out.println("Deposit failed!");
             }
 
+        } catch (NegativeAmountTransactionException e) {
+            System.out.println(e.getMessage());
+        } catch (OverdarftException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
-            System.out.println("Unkown Error!");
             e.printStackTrace();
         }
 

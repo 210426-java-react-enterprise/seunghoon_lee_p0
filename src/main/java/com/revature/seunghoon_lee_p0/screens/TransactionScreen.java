@@ -1,5 +1,6 @@
 package com.revature.seunghoon_lee_p0.screens;
 
+import com.revature.seunghoon_lee_p0.exceptions.NegativeAmountTransactionException;
 import com.revature.seunghoon_lee_p0.models.Transaction;
 import com.revature.seunghoon_lee_p0.services.AccountService;
 import com.revature.seunghoon_lee_p0.util.LinkedList;
@@ -51,7 +52,8 @@ public class TransactionScreen extends Screen {
 
             System.out.print("Press any key to go back to Dashboard.");
             consoleReader.readLine();
-        } catch(Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
